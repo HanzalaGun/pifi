@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"html"
-	"networkmanager"
+	"github.com/HanzalaGun/pifi/html"
+	"github.com/HanzalaGun/pifi/networkmanager"
 )
 
 type StatusResponse struct {

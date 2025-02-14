@@ -1,4 +1,4 @@
-module github.com/ztkent/pifi
+module github.com/HanzalaGun/pifi
 
 go 1.23.4
 

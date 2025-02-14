@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"html/handlers"
-	"networkmanager"
+	"github.com/HanzalaGun/pifi/html/handlers"
+	"github.com/HanzalaGun/pifi/networkmanager"
 )
 
 func main() {
