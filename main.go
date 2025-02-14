@@ -36,6 +36,14 @@ func main() {
 	r.HandleFunc("/autoconnect-network", handlers.AutoConnectNetworkHandler(nm)).Methods("POST")
 	r.HandleFunc("/connect", handlers.ConnectNetworkHandler(nm)).Methods("POST")
 
+	r.HandleFunc("/api/status", apihandlers.StatusHandler(nm)).Methods("GET")
+	r.HandleFunc("/api/network", apihandlers.NetworksHandler(nm)).Methods("GET")
+	r.HandleFunc("/api/setmode", apihandlers.SetMode(nm)).Methods("POST")
+	r.HandleFunc("/api/add-network", apihandlers.ModifyNetworkHandler(nm)).Methods("POST")
+	r.HandleFunc("/api/remove-network", apihandlers.RemoveNetworkConnectionHandler(nm)).Methods("POST")
+	r.HandleFunc("/api/autoconnect-network", apihandlers.AutoConnectNetworkHandler(nm)).Methods("POST")
+	r.HandleFunc("/api/connect", apihandlers.ConnectNetworkHandler(nm)).Methods("POST")
+
 	srv := &http.Server{
 		Handler:      r,
 		Addr:         "0.0.0.0:8088",

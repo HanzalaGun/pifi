@@ -67,7 +67,7 @@ type networkManager struct {
 func New() NetworkManager {
 	nm := &networkManager{
 		status: NetworkStatus{
-			APSSID: "PiFi-AP-" + randSeq(4),
+			APSSID: "Optistok-AP",
 		},
 	}
 	nm.GetNetworkStatus()

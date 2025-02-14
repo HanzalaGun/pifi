@@ -180,7 +180,7 @@ func removeExistingAPs() error {
 	// Find and delete PiFi-AP-* connections
 	connections := strings.Split(string(output), "\n")
 	for _, conn := range connections {
-		if strings.HasPrefix(conn, "PiFi-AP-") {
+		if strings.HasPrefix(conn, "Optistok-AP") {
 			deleteCmd := exec.Command("nmcli", "connection", "delete", conn)
 			if err := deleteCmd.Run(); err != nil {
 				return fmt.Errorf("failed to delete connection %s: %v", conn, err)
