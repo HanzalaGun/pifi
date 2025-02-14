@@ -11,6 +11,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/HanzalaGun/pifi/html/handlers"
+	"github.com/HanzalaGun/pifi/html/apihandlers"
 	"github.com/HanzalaGun/pifi/networkmanager"
 )
 
