@@ -1,5 +1,5 @@
 
-package handlers
+package apihandlers
 
 import (
 	"encoding/json"
