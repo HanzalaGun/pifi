@@ -87,7 +87,10 @@ func ModifyNetworkHandler(nm networkmanager.NetworkManager) http.HandlerFunc {
 			return
 		}
 		cmd := exec.Command("pm2", "restart", "optistokscrapping")
-
+		if err := cmd.Run(); err != nil {
+			jsonResponse(w, map[string]string{"error": "Failed to restart PM2: " + err.Error()}, http.StatusInternalServerError)
+			return
+		}
 		jsonResponse(w, map[string]string{"message": "Network modified successfully"}, http.StatusOK)
 	}
 }
