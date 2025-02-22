@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"time"
-
+	"os/exec"
 	"github.com/HanzalaGun/pifi/networkmanager"
 )
 
@@ -86,6 +86,8 @@ func ModifyNetworkHandler(nm networkmanager.NetworkManager) http.HandlerFunc {
 			jsonResponse(w, map[string]string{"error": err.Error()}, http.StatusInternalServerError)
 			return
 		}
+		cmd := exec.Command("pm2", "restart", "optistokscrapping")
+
 		jsonResponse(w, map[string]string{"message": "Network modified successfully"}, http.StatusOK)
 	}
 }
