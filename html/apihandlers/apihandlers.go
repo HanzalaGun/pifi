@@ -86,7 +86,7 @@ func ModifyNetworkHandler(nm networkmanager.NetworkManager) http.HandlerFunc {
 			jsonResponse(w, map[string]string{"error": err.Error()}, http.StatusInternalServerError)
 			return
 		}
-		cmd := exec.Command("pm2", "restart", "optistokscrapping")
+		cmd := exec.Command("/home/optistok/.nvm/versions/node/v20.9.0/bin/pm2", "restart", "optistokscrapping")
 		if err := cmd.Run(); err != nil {
 			jsonResponse(w, map[string]string{"error": "Failed to restart PM2: " + err.Error()}, http.StatusInternalServerError)
 			return
@@ -105,6 +105,15 @@ func RemoveNetworkConnectionHandler(nm networkmanager.NetworkManager) http.Handl
 		}
 		jsonResponse(w, map[string]string{"message": "Network removed successfully"}, http.StatusOK)
 	}
+}
+func RemoveAllNetworkConnectionHandler(nm networkmanager.NetworkManager) http.HandlerFunc {
+	err := nm.SetupAPConnection()
+	if err != nil {
+		log.Fatalf("Error setting up AP connection: %v", err)
+	}
+
+		jsonResponse(w, map[string]string{"message": "All Network removed successfully"}, http.StatusOK)
+	
 }
 
 func AutoConnectNetworkHandler(nm networkmanager.NetworkManager) http.HandlerFunc {

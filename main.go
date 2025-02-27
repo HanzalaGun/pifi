@@ -42,6 +42,7 @@ func main() {
 	r.HandleFunc("/api/setmode", apihandlers.SetMode(nm)).Methods("POST")
 	r.HandleFunc("/api/add-network", apihandlers.ModifyNetworkHandler(nm)).Methods("POST")
 	r.HandleFunc("/api/remove-network", apihandlers.RemoveNetworkConnectionHandler(nm)).Methods("POST")
+	r.HandleFunc("/api/remove-all-network", apihandlers.RemoveAllNetworkConnectionHandler(nm)).Methods("POST")
 	r.HandleFunc("/api/autoconnect-network", apihandlers.AutoConnectNetworkHandler(nm)).Methods("POST")
 	r.HandleFunc("/api/connect", apihandlers.ConnectNetworkHandler(nm)).Methods("POST")
 
