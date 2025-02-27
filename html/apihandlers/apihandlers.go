@@ -111,12 +111,12 @@ func NetworksHandler(nm networkmanager.NetworkManager) http.HandlerFunc {
 // }
 func ModifyNetworkHandler(nm networkmanager.NetworkManager) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		r.ParseForm()
-		err := nm.ModifyNetworkConnection(r.Form.Get("ssid"), r.Form.Get("password"), false)
-		if err != nil {
-			jsonResponse(w, map[string]string{"error": err.Error()}, http.StatusInternalServerError)
-			return
-		}
+		// r.ParseForm()
+		// err := nm.ModifyNetworkConnection(r.Form.Get("ssid"), r.Form.Get("password"), true)
+		// if err != nil {
+		// 	jsonResponse(w, map[string]string{"error": err.Error()}, http.StatusInternalServerError)
+		// 	return
+		// }
 
 		// Komutun çalıştırılması
 		cmd := exec.Command("bash", "-c", "source /home/optistok/.nvm/nvm.sh && nvm use 20 && export PM2_HOME=/home/optistok/.pm2 && pm2 restart optistokscrapping")
