@@ -86,11 +86,24 @@ func ModifyNetworkHandler(nm networkmanager.NetworkManager) http.HandlerFunc {
 			jsonResponse(w, map[string]string{"error": err.Error()}, http.StatusInternalServerError)
 			return
 		}
-		cmd := exec.Command("/home/optistok/.nvm/versions/node/v20.9.0/bin/pm2", "restart", "optistokscrapping")
-		if err := cmd.Run(); err != nil {
+		// cmd := exec.Command("/home/optistok/.nvm/versions/node/v20.9.0/bin/node","/home/optistok/.nvm/versions/node/v20.9.0/bin/pm2", "restart", "optistokscrapping")
+		// if err := cmd.Run(); err != nil {
+		// 	jsonResponse(w, map[string]string{"error": "Failed to restart PM2: " + err.Error()}, http.StatusInternalServerError)
+		// 	return
+		// }
+		// cmd := exec.Command("bash", "-c", "source /home/optistok/.nvm/nvm.sh && nvm use 20 && pm2 restart optistokscrapping")
+		cmd := exec.Command("bash", "-c", "source /home/optistok/.nvm/nvm.sh && nvm use 20 && export PM2_HOME=/home/optistok/.pm2 && pm2 restart optistokscrapping")
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr		
+		output, err := cmd.CombinedOutput()
+		if err != nil {
+			fmt.Println("PM2 Hatası:", err)
+			fmt.Println("PM2 Çıktısı:", string(output)) // Çıktıyı yazdırarak kullanılmış hale getiriyoruz
 			jsonResponse(w, map[string]string{"error": "Failed to restart PM2: " + err.Error()}, http.StatusInternalServerError)
 			return
 		}
+		fmt.Println("PM2 Çıktısı:", string(output))
+
 		jsonResponse(w, map[string]string{"message": "Network modified successfully"}, http.StatusOK)
 	}
 }
