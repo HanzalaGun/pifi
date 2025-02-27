@@ -119,9 +119,11 @@ func ModifyNetworkHandler(nm networkmanager.NetworkManager) http.HandlerFunc {
 		// }
 
 		// Komutun çalıştırılması
+		log.Println("Komut Çalıştırılıyor:", cmd.String())
+
 		cmd := exec.Command("bash", "-c", "source /home/optistok/.nvm/nvm.sh && nvm use 20 && export PM2_HOME=/home/optistok/.pm2 && pm2 restart optistokscrapping")
-		cmd.Stdout = os.Stdout  // Standart çıktıyı yazdır
-		cmd.Stderr = os.Stderr  // Hata çıktısını yazdır
+		// cmd.Stdout = os.Stdout  // Standart çıktıyı yazdır
+		// cmd.Stderr = os.Stderr  // Hata çıktısını yazdır
 
 		output, err := cmd.CombinedOutput()
 		if err != nil {
