@@ -148,13 +148,15 @@ func RemoveNetworkConnectionHandler(nm networkmanager.NetworkManager) http.Handl
 	}
 }
 func RemoveAllNetworkConnectionHandler(nm networkmanager.NetworkManager) http.HandlerFunc {
-	err := nm.SetupAPConnection()
-	if err != nil {
-		log.Fatalf("Error setting up AP connection: %v", err)
-	}
-
-		jsonResponse(w, map[string]string{"message": "All Network removed successfully"}, http.StatusOK)
-	
+    return func(w http.ResponseWriter, r *http.Request) {
+        err := nm.SetupAPConnection()
+        if err != nil {
+            log.Fatalf("Error setting up AP connection: %v", err)
+            jsonResponse(w, map[string]string{"error": "Failed to remove all networks"}, http.StatusInternalServerError)
+            return
+        }
+        jsonResponse(w, map[string]string{"message": "All networks removed successfully"}, http.StatusOK)
+    }
 }
 
 func AutoConnectNetworkHandler(nm networkmanager.NetworkManager) http.HandlerFunc {
