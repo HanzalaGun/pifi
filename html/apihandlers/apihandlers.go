@@ -111,12 +111,12 @@ func NetworksHandler(nm networkmanager.NetworkManager) http.HandlerFunc {
 // }
 func ModifyNetworkHandler(nm networkmanager.NetworkManager) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		// r.ParseForm()
-		// err := nm.ModifyNetworkConnection(r.Form.Get("ssid"), r.Form.Get("password"), true)
-		// if err != nil {
-		// 	jsonResponse(w, map[string]string{"error": err.Error()}, http.StatusInternalServerError)
-		// 	return
-		// }
+		r.ParseForm()
+		err := nm.ModifyNetworkConnection(r.Form.Get("ssid"), r.Form.Get("password"), true)
+		if err != nil {
+			jsonResponse(w, map[string]string{"error": err.Error()}, http.StatusInternalServerError)
+			return
+		}
 
 		// Komutun çalıştırılması
 		
