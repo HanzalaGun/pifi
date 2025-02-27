@@ -4,8 +4,10 @@ package apihandlers
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"time"
+	"os"
 	"os/exec"
 	"github.com/HanzalaGun/pifi/networkmanager"
 )
